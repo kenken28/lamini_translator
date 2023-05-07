@@ -20,9 +20,11 @@ def main():
     )
     translated_text = translator_llm(input=input_text, output_type=TranslatedText)
 
+    # remove unexpected text from source_language string
     if '\n' in translated_text.source_language:
         idx = translated_text.source_language.find('\n')
         translated_text.source_language = translated_text.source_language[:idx]
+
     print(translated_text)
 
 
