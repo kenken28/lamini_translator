@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h1>Translator</h1>
+
+<div>
+<form action="#" method="post">
+    <p>
+    <label>
+        Text to be translated:<br>
+        <textarea id="source_text" name="source_text" rows="8" cols="100">{{source_text}}</textarea>
+    </label>
+    </p>
+    <p>
+    <label>
+        Target language:<br>
+        <input type="text" name="target_language" value={{target_language}}>
+    </label>
+    </p>
+    <p><input type="submit" value="Submit"></p>
+</form>
+</div>
+
+<br>
+<div style="visibility:{{result_visibility}}">
+    <p>
+    <label>
+        Translation:
+        <br>
+        {{translation}}
+    </label>
+    </p>
+
+    <p>
+    <label>
+        Original text language:
+        <br>
+        {{source_language}}
+    </label>
+    </p>
+</div>
+
+</body>
+
+<br>
+<br>
+<footer>
+  <p>Powered by <a href="https://lamini-ai.github.io/">lamini-ai</a></p>
+</footer>
+</html>
