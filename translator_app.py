@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request
 from lamini_translator import LlaminiTranslator
 
 app = Flask(__name__)
-translator = LlaminiTranslator()
+translator = LlaminiTranslator(config_path='./configure_llama.yaml')
 
 
 @app.route('/', methods=['GET', 'POST'])

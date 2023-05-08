@@ -1,5 +1,24 @@
 from llama import LLM, Type, Context
+import yaml
+import collections
 import random
+
+
+def flatten_dict(d, parent_key='', sep='.'):
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + sep + k if parent_key else k
+        if isinstance(v, collections.MutableMapping):
+            items.extend(flatten_dict(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
+
+
+def load_yaml(yaml_path):
+    with open(yaml_path, 'r') as f:
+        d = yaml.safe_load(f)
+        return flatten_dict(d)
 
 
 class TranslatedText(Type):
@@ -25,8 +44,12 @@ class TextToBeTranslated(Type):
 
 
 class LlaminiTranslator(LLM):
-    def __init__(self):
-        super().__init__(name="translator")
+    def __init__(self, config_path=None):
+        if config_path is not None:
+            config = load_yaml(config_path)
+            super().__init__(name="translator", config=config)
+        else:
+            super().__init__(name="translator")
 
     def translate(self, text, language) -> tuple:
         """
@@ -65,10 +88,10 @@ class LlaminiTranslator(LLM):
 
 
 def main():
-    translator = LlaminiTranslator()
+    translator = LlaminiTranslator(config_path='./configure_llama.yaml')
     # rand_text = translator.random_text()
     # rand_lang = translator.random_language()
-    text = "Emmmm, test, test, hello, anybody home?"
+    text = 'Emmmm, test, test, hello, anybody home?'
     translation = translator.translate(text, "日本語")
 
 
