@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<h1>Translator</h1>
+<h1>~Lamini Translator~</h1>
 
 <div>
 <form action="#" method="post">
@@ -22,12 +22,12 @@
         <input type="text" name="target_language" value={{target_language}}>
     </label>
     </p>
-    <p><input type="submit" value="Submit"></p>
+    <p><input type="submit" value="Translate" onclick="processing();"></p>
 </form>
 </div>
 
 <br>
-<div style="visibility:{{result_visibility}}">
+<div id="result" style="visibility:{{result_visibility}}">
     <p>
     <label>
         Translation:
@@ -44,6 +44,13 @@
     </label>
     </p>
 </div>
+
+<script>
+function processing() {
+    document.getElementById('result').innerHTML = "<h3>Generating Translation...</h3>";
+    document.getElementById('result').style.visibility= "visible";
+}
+</script>
 
 </body>
 

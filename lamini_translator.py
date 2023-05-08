@@ -87,13 +87,9 @@ class LlaminiTranslator(LLM):
     #     return self(input=rand_seed, output_type=RandomLanguage).language
 
 
-def main():
+def test_translator():
     translator = LlaminiTranslator(config_path='./configure_llama.yaml')
     # rand_text = translator.random_text()
     # rand_lang = translator.random_language()
     text = 'Emmmm, test, test, hello, anybody home?'
-    translation = translator.translate(text, "日本語")
-
-
-if __name__ == '__main__':
-    main()
+    print(translator.translate(text, "日本語"))
