@@ -5,6 +5,13 @@ import random
 
 
 def flatten_dict(d, parent_key='', sep='.'):
+    """
+    Flatten a nested dictionary
+    :param d: original dictionary
+    :param parent_key: key of the parent dictionary
+    :param sep: delimiter
+    :return: a flattened dictionary
+    """
     items = []
     for k, v in d.items():
         new_key = parent_key + sep + k if parent_key else k
@@ -16,19 +23,24 @@ def flatten_dict(d, parent_key='', sep='.'):
 
 
 def load_yaml(yaml_path):
+    """
+    Load a yaml config file into a flattened dictionary
+    :param yaml_path: path to yaml file
+    :return: a flattened dictionary
+    """
     with open(yaml_path, 'r') as f:
         d = yaml.safe_load(f)
         return flatten_dict(d)
 
 
 class TranslatedText(Type):
-    source_language: str = Context("a word representing the language type of the source text, this word also needs to be in the target language")
+    source_language: str = Context("language type of the source text")
     translation: str = Context("translated text")
 
 
 class TextToBeTranslated(Type):
     text: str = Context("a line of text in any language")
-    target_language: str = Context("target language type for the translated text; if this field is empty, pick a random target language")
+    target_language: str = Context("target language type for the translated text")
 
 
 # class RandomText(Type):
@@ -43,7 +55,7 @@ class TextToBeTranslated(Type):
 #     seed: str = Context("a random seed string")
 
 
-class LlaminiTranslator(LLM):
+class LaminiTranslator(LLM):
     def __init__(self, config_path=None):
         if config_path is not None:
             config = load_yaml(config_path)
@@ -88,7 +100,7 @@ class LlaminiTranslator(LLM):
 
 
 def test_translator():
-    translator = LlaminiTranslator(config_path='./configure_llama.yaml')
+    translator = LaminiTranslator(config_path='./configure_llama.yaml')
     # rand_text = translator.random_text()
     # rand_lang = translator.random_language()
     text = 'Emmmm, test, test, hello, anybody home?'

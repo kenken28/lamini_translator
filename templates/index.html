@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lamini Translator</title>
 </head>
 
 <body>
@@ -14,15 +14,18 @@
     <label>
         Text to be translated:<br>
         <textarea id="source_text" name="source_text" rows="8" cols="100">{{source_text}}</textarea>
+        <br><input id="random_text_button" type="button" value="Random" />
     </label>
     </p>
     <p>
     <label>
         Target language:<br>
-        <input type="text" name="target_language" value={{target_language}}>
+        <input id="target_language" type="text" name="target_language" value={{target_language}}>
+        <input id="random_language_button" type="button" value="Random" />
     </label>
     </p>
-    <p><input type="submit" value="Translate" onclick="processing();"></p>
+    <br>
+    <p><input id="translate_button" type="submit" value="Translate" style="height:50px; width:150px"></p>
 </form>
 </div>
 
@@ -45,18 +48,16 @@
     </p>
 </div>
 
-<script>
-function processing() {
-    document.getElementById('result').innerHTML = "<h3>Generating Translation...</h3>";
-    document.getElementById('result').style.visibility= "visible";
-}
-</script>
-
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 
 <br>
 <br>
 <footer>
-  <p>Powered by <a href="https://lamini-ai.github.io/">lamini-ai</a></p>
+  <p>
+      Designed by <a href="https://www.linkedin.com/in/yuxin-eugene-xu-90595b118/">Eugene Xu</a>,
+      source code <a href="https://github.com/kenken28/lamini_translator">repository</a>;
+      Powered by <a href="https://lamini-ai.github.io/">lamini-ai</a>.
+  </p>
 </footer>
 </html>
